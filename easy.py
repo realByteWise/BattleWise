@@ -143,8 +143,6 @@ def game():
         showbord(bordguess)
         chances-=1
         print('Chances left :', chances)
-
-
             
 bordsiz=3
 board=[]
@@ -160,5 +158,3 @@ for x in range(bordsiz):
         row.append(' ')
     csbord.append(row)
 letternumgrid= {'A': 0,'B': 1,'C': 2}
-
-
