@@ -1,47 +1,46 @@
-import random
-import time
-def clear2():
-    for hu in range(24):
-        print("")
-def clear():
-    time.sleep(1)
-    for _ in range(40):
-        print("")    
-print("Please maximize shell window for best experience......")
-time.sleep(5)
-print("""                                                                                                     
+#BattleWise v3.1 BIMBIMBAMBAM
+
+from resources import *
+import random,time
+
+scroll("""Before starting, set IO font to Consolas and font size to '11'
+Ready?""")
+print()
+ready=input("").lower()
+if "n" in ready:
+    print("Too bad.")
+clear(24,1.5)
+print("For peak gaming experience, please maximize Shell.")
+clear(24,5)
+print("""
+                                     @@@@
+                                    @@@@@@                                           
+                  @@@@@   @@    @@  @@@@@@  @@@@@@@@   @@@@@@
+                  @@  @@   @@  @@   @@@@@@     @@      @@
+                  @@@@@     @@@@    @@@@@@     @@      @@@@@               
+                  @@  @@     @@     @@@@@@     @@      @@               
+                  @@@@@      @@     @@@@@@     @@      @@@@@@              
                                     @@@@@@                                 
-                                    @@@@@@                                 
-                  @@@@@     @@@ @@@ @@@@@@ @@@@@@@     @@@@@@              
-                  @@@@@      @@@@   @@@@@@    @@       @@@@@               
-                  @@@@@@      @@    @@@@@@    @@       @@@@@               
-                  @@@@@       @@    @@@@@@    @@       @@@@@@              
-                                    @@@@@@                                 
-                                    @@@@@@                                 
-                                    @@@@@@@@@@@@@@@@@@@@@@@@@              
-                                    @@@@@@@@@@@@@@@@@@@@@@@@@              
-                                     @@@@@@@@@@@@@@@@@@@@@@@               
+                                    @@@@@@                                
+                                    @@@@@@@@@@@@@@@@@@@@@@@@              
+                                     @@@@@@@@@@@@@@@@@@@@@@@@              
+                                      @@@@@@@@@@@@@@@@@@@@@@               
                                                                            
-               @@@@@@@@@@@@@@@@@@@@@@                                      
+              @@@@@@@@@@@@@@@@@@@@@@@                                      
              @@@@@@@@@@@@@@@@@@@@@@@@@                                     
-              @@@@@@@@@@@@@@@@@@@@@@@@                                     
-                                 @@@@@                                     
-                                 @@@@@                                     
-                                 @@@@@                                     
-               @@ @@@ @@     @@  @@@@@   @@@@@    @@@@@@                   
-                @@@@@@@@     @@  @@@@@  @@@       @@@                
-                @@@ @@@      @@  @@@@@  @@@@@@    @@@@@@                   
-                 @@  @       @@  @@@@@   @@@@     @@@@@@                    
-                                 @@@@@                                     
-                                 @@@@@                                     
-                                 @@@@@                                     
-                                 @@@@@""")
-time.sleep(1)
-clear()
-print("In collaboration with Johan Gleon And Nithin presents to you........")
-clear2()
-time.sleep(3)
-clear()
+              @@@@@@@@@@@@@@@@@@@@@@@@@                                    
+                                 @@@@@@                                    
+                                 @@@@@@                            
+             @@         @@  @@   @@@@@@    @@@@@   @@@@@@                   
+             @@@   @   @@@  @@   @@@@@@   @@       @@                 
+              @@@ @@@ @@@   @@   @@@@@@    @@@@    @@@@@@
+               @@@@@@@@@    @@   @@@@@@       @@   @@
+                @@@ @@@     @@   @@@@@@   @@@@@    @@@@@@                    
+                                 @@@@@@                                    
+                                  @@@@""")
+clear(25,3)
+scroll("In collaboration with Johan, Gleon and Nithin presents....")
+clear(25,3)
 print("""                          
   @@@@@@@     @@    @@@@@@@@ @@@@@@@ @@@     @@@@@@        
   @@@  @@@   @@@@      @@@     @@@   @@@     @@@         
@@ -49,45 +48,46 @@ print("""
   @@@@@@@@  @@@ @@@    @@@     @@@   @@@     @@@@@@           
   @@@  @@@@ @@@@@@@@   @@@     @@@   @@@@@@@ @@@       
   @@@@@@@@ @@@@  @@@@  @@@     @@@   @@@@@@@ @@@@@@
-                                                                      ++
-  ++++++++++++:--=+==========++++=+++++++++++++++++++++    --        +++++
-  +++++++++++++++++++++++++++++++++++++++++++++++++++++    ---     ++++++++
-  +++++++++++++++++++++++++++++++++++++++++++++++++++++      - --- +++++++++
-  +++++++++++++++++++++++++++++++++++++++++++++++++++++=   ----     +++++++
- ++++++++++++++++++++++++++++++++++++++++++++++++++++++=  			  ++++                        
-  ++++++++++++++++++++++++++++++++++++++==                                           
-  ++++++++++++++++++++++++++++++                                @@@@    @@@@@@@@     
-  +++++++++++++=   ++=  =+++++++=                @@@@@ @@@@   @@@@@@@@  @@@@@@@@     
-  +++++++++=  =++= ++= +++  =++++= @@@@@   @@@   @@@@  @@@@  @@@@@@@@   @@@@         
-  ++++++++=     ++++++++     =++++  @@@@@  @@@@ @@@@@  @@@@  @@@@@      @@@@@@@@     
-  ++++++++++++++++++++++++++++++++=  @@@@@@@@@@ @@@@   @@@@   @@@@@@@@  @@@@@@@@     
-  +++=++++======+++++++======+++++=   @@@@@@@@@@@@@@   @@@@@    @@@@@@@ @@@@@@       
-  ++=+++++=    =++++++++=    =++++     @@@@@@@@@@@@    @@@@@  @    @@@@ @@@@@@@@@    
-  +=  +++++= =+++  ++= =++= =++++=     @@@@@@@@@@@@     @@@@  @@@@@@@@@ @@@@@@@@@    
-       +++++++=    ++=   =+++++++       @@@@  @@@@      @@@@  @@@@@@@    @@@@@@@@    
-        =+++++=    ++=  =+++++++         @@     @                                    
-          ++++++++++++++++++++                                                       
-            ++++++++++++++++                                                         
-                ++++++++                              """)
+                                                                      +++
+  ++++++++++++:--=+==========++++=+++++++++++++++++####    --       +++++##
+  +++++++++++++++++++++++++++++++++++++++++++++++++####    ---     +++++++##
+  +++++++++++++++++++++++++++++++++++++++++++++++++####      - --- ++++++###
+  ++++++++++++++++++++++++++++++++++++++++++++++########   ----     ++++###
+  ++++++++++++++++++++++++++++++++++++##################              ###                     
+  ++++++++++++++++++++++++++++############                                           
+  +++++++++++++++++++++++++++###                                @@@@    @@@@@@@     
+  +++++++++++++=   ++=  =+++++###                 @@@@ @@@@   @@@@@@@@  @@@@@@@@     
+  +++++++++=  =++= ++= +++  =++### @@@@     @@    @@@  @@@@  @@@@       @@@@         
+  ++++++++=     +++@@@++     =+###  @@@@   @@@@  @@@@  @@@@  @@@@@      @@@@@@@@     
+  ++++++++++++++++@@@@@+++++++++###  @@@  @@@@@@ @@@    @@@   @@@@@@@@   @@@@@@@@     
+  +++=++++======++@@@@@======+++###   @@@@@@@@@@@@@@    @@@@    @@@@@@@  @@@@       
+  ######++=    =+++@@@++=    =+###     @@@@@@@@@@@@     @@@@       @@@@   @@@@@@@@    
+  ##  ###++= =+++  ++= =++= =++###     @@@@@@@@@@@@      @@@@  @@@@@@@@@  @@@@@@@@@   
+       ###++++=    ++=   =++++###       @@@@  @@@@       @@@@   @@@@@@        
+        ####++=    ++=  =+++####         @@    @@                                    
+          ####++++++++++++####                                                       
+            ######++++######                                                         
+                ########""")
 time.sleep(3)
-clear()
-
-if input("Do you dare to play? (Yes/no)").upper()=="YES":
-    clear()
-    print("Choose your difficulty level ( With Caution ):")
-    print("1.Easy ")
-    print("2.Medium < GENGHIS KHAN >")
-    print("3.Hard  <NAPOLEAN BONEPART>")
-    diff=input("").upper()
-    if diff=="EASY":
-        clear()
-        print(""" You find yourself on the battle field the enemy has sent battle ships to take over the port
-                     Place your battle ships wiseley and GET READY TO FIGHT""")
-        time.sleep(4)
-        clear()
+scroll("""Do you dare to play?
+ 1. Yes
+ 2. No""")
+print()
+if int(input(""))==1:
+    clear(25)
+    scroll("""Choose your difficulty level (with caution):
+ 1. Easy    < Rajat :/ >
+ 2. Medium  < GENGHIS KHAN >
+ 3. Hard    < NAPOLEON BONAPARTE >
+            ^^^^^^^^^^^^^^^^^^^^ WARNING!""")
+    print()
+    diff=int(input(""))
+    if diff==1:
         import easy
-        easy.game()
-    elif diff=="MEDIUM":
+        easy.game() #all dialogues are in the module
+    elif diff==2:
+        #same with this, just medium.game()
+        #also im lazy to fix the rest ill do it later :P
         clear()
         print("""Looks like you like yourself a bit of a challenge eh?!..... i hope your ready
                                                              for whats coming""")
@@ -103,7 +103,8 @@ if input("Do you dare to play? (Yes/no)").upper()=="YES":
         clear()
         import medium
         medium.game()
-    elif diff=="HARD":
+    elif diff==3:
+        #here also; hard.game()
         clear()
         print("""Oh you think your ready to go against the GREAT EMPEROR NAPOLEON?
                                                             This battle shall be comical""")
@@ -142,13 +143,14 @@ if input("Do you dare to play? (Yes/no)").upper()=="YES":
         print("""You find yourself on the battle field of the french revolution the great napolean
                                     has sent his fleet to destroy you place your warships
                                               and defend your nation   """)
-    
         time.sleep(4)
         clear()
         import hard
         hard.game()
     else:
-        print("Invalid choice. Exiting...")
+        scroll("That's not... a choice? Okay... thanks for playing!")
 
 else:
-    print("Aerhhdfgh you've escaped... for now")
+    clear(25)
+    scroll("B r u h . ",0.1)
+    scroll("Coward ahh move but alright!")
