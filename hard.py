@@ -204,6 +204,7 @@ def game():
         game()
     else:
         clear()
+
 bordsiz=5
 board=[]
 for pp in range(bordsiz):
