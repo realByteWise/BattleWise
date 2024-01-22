@@ -1,8 +1,6 @@
-import time
-import random
-def clear2():
-    for hu in range(24):
-        print("")
+from resources import *
+import time,random
+
 def secretbord(board):
     print("     A     B    C   ")
     print("━━━━━━━━━━━━━")
@@ -29,11 +27,6 @@ def showbord(board):
         print()
         print(" ━━━━━━━━━━━━━")
         row_number += 1
-
-def clear():
-    time.sleep(1)
-    for _ in range(40):
-        print("")
 
 def userattack(board):
     column=input("Column (A to C): ").upper()
@@ -84,12 +77,12 @@ def game():
             print("You already placed a battleship there!")
             rowno, colno = userattack(board)
         board[rowno][colno] = 'X'
-        clear()
+        clear(25,1)
         showbord(board)
     print("Computer placing battleships:")
     bordguess = [[' ' for _ in range(bordsiz)] for _ in range(bordsiz)]  
     placeship(csbord, bordguess)
-    clear()
+    clear(25,1)
     secretbord(csbord)
 
     bordguess = []
@@ -111,7 +104,7 @@ def game():
             continue
 
         if csbord[rowno][colno]=='X':
-            clear()
+            clear(25,1)
             print("YOU HIT THE WARSHIP!!!")
             time.sleep(2)
             print("Congratulations General you have sunk the Warship ")
@@ -122,7 +115,7 @@ def game():
             bordguess[rowno][colno] = '.'
             print("Your cannon has shot ....IT MISSED!")
 
-        clear()
+        clear(25,1)
         print("THE ENEMY HAS FIRED THIER CANNON:")
         time.sleep(1)
         csrow=random.randint(0,bordsiz-1)
@@ -132,7 +125,7 @@ def game():
             cscolumn = random.randint(0, bordsiz - 1)
 
         if board[csrow][cscolumn] == 'X':
-            clear()
+            clear(25,1)
             print("GENERAL WE HAVE BEEN HIT ABANDON  SHIP!!!")
             print("Your warship was destroyed in war try again!")
             break
@@ -143,6 +136,16 @@ def game():
         showbord(bordguess)
         chances-=1
         print('Chances left :', chances)
+
+scroll("You find yourself on the battlefield with the... ")
+scroll("Rajat... ",0.100)
+scroll("wait who called him he-")
+#       *insert Massive Rajat pic here*
+clear(1,1)
+scroll("The enemy has sent battle ships to take over the port")
+clear(1,1)
+scroll("Place your battle ships wiseley and GET READY TO FIGHT!")
+clear(24,4)
             
 bordsiz=3
 board=[]
@@ -158,3 +161,5 @@ for x in range(bordsiz):
         row.append(' ')
     csbord.append(row)
 letternumgrid= {'A': 0,'B': 1,'C': 2}
+
+game()
