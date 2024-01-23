@@ -1,222 +1,196 @@
-import time
-import random
-def clear2():
-    for hu in range(24):
-        print("")
-def secretbord(board):
-    print("     A     B    C    D     E  ")
-    print(" ━━━━━━━━━━━━━━━━━━━━━")
-    row_number=1
-    for row in board:
-        print(row_number,end=' ┃ ')
-        for cell in row:
-            if cell=='X':
-                print(' ' + ' ' + ' ┃', end=' ')
-            else:
-                print(' ' +str(cell) + ' ┃', end=' ')
-        print()
-        print(" ━━━━━━━━━━━━━━━━━━━━")
-        row_number+= 1
+from resources import *
+import time as t
+import random as r
 
-def showbord(board):
-    print("     A     B    C    D     E  ")
-    print(" ━━━━━━━━━━━━━━━━━━━━━")
-    row_number=1
+#Show Boards:
+def showBoard(board):
+    print("     A    B    C    D    E    F    G")
+    print("  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+    rowNum = 1
     for row in board:
-        print(row_number, end=' ┃ ')
+        print(rowNum,end=" ┃ ")
         for cell in row:
             print(' ' + str(cell) + ' ┃', end=' ')
         print()
-        print(" ━━━━━━━━━━━━━━━━━━━━")
-        row_number+=1
+        print("  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+        rowNum += 1
 
-def clear():
-    time.sleep(1)
-    for _ in range(40):
-        print("")
-
-def userattack(board):
-    column=input("Column (A to E): ").upper()
-    while column not in "ABCDE":
-        print("That column is wrong  It should be either A, B, C, D, or E")
-        column = input("Column (From A to E): ").upper()
-    row = input("Enter the row number (1 to 5): ")
-    while row not in "12345":
-        print("That row is wrong! It should be 1, 2, 3, 4, or 5")
-        row = input("Enter a Row (1 to 5): ")    
-    rowno=int(row) - 1
-    
-    colno =letternumgrid[column]
-    
-    while board[rowno][colno]=='X':
-        print("ARIGH! You may not fire on to your own battle ship?")
-        column = input("Column (A to E): ").upper()
-        while column not in "ABCDE":
-            print("That column is wrong! It should be A, B, C, D, or E")
-            column=input("Column (A to E): ").upper()
-        row=input("Enter the row number (1 to 5): ")
-        while row not in "12345":
-            print("That row is wrong! It should be 1, 2, 3, 4, or 5")
-            row =input("Enter row Row (1 to 5): ")
+#Player Placing Ships:
+def placePlayerShip(board):
+    print("Place your Battle ships!")
+    showBoard(playerBoard)
+    for ships in range(4):
+        print("Place Battle Ship",ships+1)
+        column = input("Enter column (A to G): ").upper()
+        while column not in 'ABCDEFG':
+            column = input("Column out of bounds! Enter again: ").upper()
+        row = input("Enter Row number (1 to 7): ")
+        while row not in '1234567':
+            row = input("Row out of bounds! Enter again: ")
         
-        rowno=int(row) - 1
-        colno=letternumgrid[column]
-    return rowno,colno
+        rowNo = int(row)-1
+        colNo = grid[column]
+    
+        while board[rowNo][colNo] == 'X':
+            print("You have already placed a ship there! Try again.")
+            column = input("Enter column (A to G): ").upper()
+            while column not in 'ABCDEFG':
+                column = input("Column out of bounds! Enter again: ").upper()
+            row = input("Enter Row number (1 to 7): ")
+            while row not in '1234567':
+                row = input("Row out of bounds! Enter again: ")
+        
+            rowNo = int(row)-1
+            colNo = grid[column]
+    
+        board[rowNo][colNo] = 'X'
+        clear(25,1)
+        showBoard(board)
+        
+#Computer Placing Ships:
+def csPlaceShip(board):
+    print("Computer placing Battle ships...")
+    t.sleep(1)
+    for ships in range(4):
+        csRow = r.randint(0,boardSize-1)
+        csCol = r.randint(0,boardSize-1)
+        while board[csRow][csCol]=='X':
+            csRow = r.randint(0,boardSize-1)
+            csCol = r.randint(0,boardSize-1)
+        
+        board[csRow][csCol] = 'X'
+    clear(25,2)
 
-def placeship(board):
-    for n in range(2):
-        rowno=random.randint(0,bordsiz-1)
-        colno=random.randint(0,bordsiz-1)
-        while board[rowno][colno] == 'X':
-            rowno=random.randint(0,bordsiz-1)
-            colno=random.randint(0,bordsiz-1)
-        board[rowno][colno]='X'
+#Player Attacks:
+def playerAttack(board):
+    column=input("Enter Column (A to G): ").upper()
+    while column not in "ABCDEFG":
+        column = input("Column out of bounds! Enter again: ").upper()
+    row=input("Enter row number (1 to 7): ")
+    while row not in "1234567":
+        row = input("Row out of bounds! Enter again: ")
+    
+    rowNo = int(row)-1
+    colNo = grid[column]
 
+    while board[rowNo][colNo] == '-':
+        print("You already guessed that area! Try again.")
+        column = input("Enter Column (A to G)  : ").upper()
+        while column not in "ABCDEFG":
+            column = input("Column out of bounds! Enter again: ").upper()
+        row = input("Enter row number (1 to 7)  : ")
+        while row not in "1234567":
+            row = input("Row out of bounds! Enter again: ")
+        
+        rowNo = int(row)-1
+        colNo = grid[column]
+    return rowNo,colNo
+
+#Dialogue:
+def dialogue():
+    scroll([boldred],"*replacement dialogue*")
+    clear(24,4)
+    print(END)
+
+#Main Game:
 def game():
-    print("General You may place 2 Battle Ships in Strategic positions now :")
-    showbord(board)
-    for _ in range(2):
-        print("PLACE BATTLE SHIP", _ + 1)
-        rowno, colno = userattack(board)
-        while board[rowno][colno]=='X':
-            print("Argh ! One of our battalion Ships is already there!")
-            rowno, colno = userattack(board)
-        board[rowno][colno]='X'
-        clear()
-        showbord(board)
+    #Dialogue:
+    dialogue()
+    
+    #Player Placing Ships
+    placePlayerShip(playerBoard)
+    clear(25,1)
 
-    print("The Great Napolean Is Sending his Fleet! Prepare for bloodshed:")
-    placeship(csbord)
-    placeship(csbord)
-    clear()
-    secretbord(csbord)
-
-    bordguess=[]
-    for e in range(bordsiz):
+    #Player Guess Board:
+    playerGuess = []
+    for i in range(boardSize):
         row=[]
-        for e in range(bordsiz):
+        for j in range(boardSize):
             row.append(' ')
-        bordguess.append(row)
-    playerchance=0
-    cschance=0
-    chances=7
-    while playerchance <2 and cschance <2 and chances > 0:
-        print("Its Time General FIRE THE CANNON ")
-        rowno,colno=userattack(board)
-
-        if bordguess[rowno][colno] != ' ':
-            print("Those coordinates have aldready been Destroyed")
-            time.sleep(1)
+        playerGuess.append(row)
+    
+    #Computer Guess Board:
+    csGuess = []
+    for i in range(boardSize):
+        row=[]
+        for j in range(boardSize):
+            row.append(' ')
+        csGuess.append(row)
+    
+    #Computer Placing Ships:
+    csPlaceShip(csBoard)
+    
+    #Guessing Time:
+    playerHits = 0
+    csHits = 0
+    
+    while True:
+        showBoard(playerGuess)
+        print("It's time to fire your cannon!")
+        rowNo,colNo = playerAttack(csBoard)
+        
+        if playerGuess[rowNo][colNo]!=' ':
+            print("Those coordinates have already been destroyed!")
+            t.sleep(1)
             continue
-
-        if csbord[rowno][colno]=='X':
-            print("THE CANNON HAS HIT NAPOLEANS BATTALION!")
-            time.sleep(1)
-            bordguess[rowno][colno]='X'
-            playerchance += 1
+        
+        if csBoard[rowNo][colNo]=='X':
+            playerGuess[rowNo][colNo] = 'X'
+            print("Your cannon has hit one of the enemy's battleships")
+            playerHits+=1
+            t.sleep(1)
+            
         else:
-            bordguess[rowno][colno]='.'
-            print("Argh It was a Flobber the cannon missed")
-            time.sleep(1)
-
-        clear()
-        print("ENEMY CANNON FIRED TAKE COVER!!!!:")
-        csrow = random.randint(0,bordsiz-1)
-        cscolumn = random.randint(0,bordsiz-1)
-
-        while bordguess[csrow][cscolumn]!=' ':
-            csrow = random.randint(0,bordsiz-1)
-            cscolumn = random.randint(0,bordsiz-1)
-
-        if board[csrow][cscolumn]=='X':
-            print("ABANDON SHIP ONE OF OUR WAR FLEETS HAVE BEEN HIT!!")
-            bordguess[csrow][cscolumn] = 'X'
-            cschance+=1
+            playerGuess[rowNo][colNo] = '-'
+            print("Your cannon missed!")
+            t.sleep(1)
+        
+        clear(25,1)
+        print("The enemy is firing their cannon!")
+        csRow = r.randint(0,boardSize-1)
+        csCol = r.randint(0,boardSize-1)
+        
+        if playerBoard[csRow][csCol]!=' ':
+            csRow = r.randint(0,boardSize-1)
+            csCol = r.randint(0,boardSize-1)
+        
+        if playerBoard[csRow][csCol] == 'X':
+            csGuess[csRow][csCol] = 'X'
+            print("One of your ship has been hit!")
+            csHits+=1
+            clear(1,1)
+        
         else:
-            bordguess[csrow][cscolumn] = '.'
-            print("Yearhhh! The Enemy cannon has missed thier shot")
-        showbord(bordguess)
-        chances-=1
-        print('Cannons Left:', chances)
-
-    if playerchance==2:
-        clear()
-        print("""           %%%%%%###%%%%%%%%%%             
-         %%%#####%%%#####%%%%%%%%%%%%        
-      %%#######################%%%%%%%%      
-    %%##%###################**###%%%%%%%%    
-   %%#%####################**==+##%%%%%%%%   
-  %%#%#######################**###%%%%%%%%%  
- %%#############################%%%%%%%%%%%% 
- %#############################%%%%%%%%%%%%% 
- %#%#########################%%%%%%%%%%%%%%%%
-%%%%#######################%%%%%%%%%%%%%%%%%%
-%%%%%%%%%################%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%******+#%%%%%%%*+++++++#%%%%      			"Argh You have Defeated me...For now mortal"
-     %**%%*+*+#%**++*#%+***+*##++++#%++*%    
-    %++*#%+++++=+**+*===++**++++++=#%*+=*    
-    %++**%+=++++++++*===++=++++++==*#+++#    
-    %#+++*========+*++++++*+=======+*++*%    
-      ##**=======++++++++*+++======+##%      
-      %###======+====+**+====+=====+%%       
-     %####*=======**********======+###%      
-    %########*======++++++=====+#%#####%     
-   %%#######%%#++==+**+*++==***#%%######%    
-   %#####*#***###+=====+++*+###***######%%   
-   %#############+=======+*+*###########%%   
-   %%############+======++*+*###########%%   
-    %%########+*#*===++*+*++##**########%    
-       %%%%%##%%%%%%**#%%##%%%%%#%%%%%%%   """)
-        time.sleep(1)
-    elif cschance==2:
-        clear()
-        print("""           %%%%%%###%%%%%%%%%%             
-         %%%#####%%%#####%%%%%%%%%%%%        
-      %%#######################%%%%%%%%      
-    %%##%###################**###%%%%%%%%    
-   %%#%####################**==+##%%%%%%%%   
-  %%#%#######################**###%%%%%%%%%  
- %%#############################%%%%%%%%%%%% 
- %#############################%%%%%%%%%%%%% 
- %#%#########################%%%%%%%%%%%%%%%%
-%%%%#######################%%%%%%%%%%%%%%%%%%
-%%%%%%%%%################%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%******+#%%%%%%%*+++++++#%%%%      
-     %**%%*+*+#%**++*#%+***+*##++++#%++*%    
-    %++*#%+++++=+**+*===++**++++++=#%*+=*    
-    %++**%+=++++++++*===++=++++++==*#+++#    
-    %#+++*========+*++++++*+=======+*++*%    "NO ONE SHALLL DEFEAT THE GREAT NAPOLEAN YEARGHHHH"
-      ##**=======++++++++*+++======+##%      
-      %###======+====+**+====+=====+%%       
-     %####*=======**********======+###%      
-    %########*======++++++=====+#%#####%     
-   %%#######%%#++==+**+*++==***#%%######%    
-   %#####*#***###+=====+++*+###***######%%   
-   %#############+=======+*+*###########%%   
-   %%############+======++*+*###########%%   
-    %%########+*#*===++*+*++##**########%    
-       %%%%%##%%%%%%**#%%##%%%%%#%%%%%%%   """)
-        time.sleep(1)
-    else:
-        print("You both ran out of Ammo. RETREAT!")
-    ch=input("Shall you challenege Napolean Again??").upper()
-    if ch=="YES":
-        game()
-    else:
-        clear()
-
-bordsiz=5
-board=[]
-for pp in range(bordsiz):
+            csGuess[csRow][csCol] = '-'
+            print("The enemy missed their shot!")
+            clear(1,1)
+        
+        if playerHits==4:
+            print("You destroyed all of the enemy's ships! You Win!!!")
+            break
+        
+        elif csHits==4:
+            print("The enemy has hit all your battle ships! You Lost. L + Ratio + *every single insult in existence*")
+            break
+        
+#Creating Player's Board
+boardSize = 7
+playerBoard = []
+for i in range(boardSize):
     row=[]
-    for x in range(bordsiz):
+    for j in range(boardSize):
         row.append(' ')
-    board.append(row)
-csbord=[]
-for x in range(bordsiz):
-    row=[]
-    for y in range(bordsiz):
+    playerBoard.append(row)
+
+#Creating Computer's Board
+csBoard = []
+for i in range(boardSize):
+    row = []
+    for j in range(boardSize):
         row.append(' ')
-    csbord.append(row)
-letternumgrid={'A': 0,'B': 1,'C': 2,'D': 3,'E': 4,}
+    csBoard.append(row)
+
+#Letter Number Grid
+grid = {'A':0,'B':1,'C':2,'D':3,'E':4,'F':5,'G':6}
+
 game()
