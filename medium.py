@@ -1,18 +1,16 @@
 from resources import *
-import time as t
-import random as r
 
 #Show Boards:
 def showBoard(board):
-    print("     A    B    C    D    E    F")
-    print("  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+    print("     A    B    C    D    E")
+    print("  ━━━━━━━━━━━━━━━━━━━━━━━━━━")
     rowNum = 1
     for row in board:
         print(rowNum,end=" ┃ ")
         for cell in row:
             print(' ' + str(cell) + ' ┃', end=' ')
         print()
-        print("  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+        print("  ━━━━━━━━━━━━━━━━━━━━━━━━━━")
         rowNum += 1
 
 #Player Placing Ships:
@@ -21,11 +19,11 @@ def placePlayerShip(board):
     showBoard(playerBoard)
     for ships in range(3):
         print("Place Battle Ship",ships+1)
-        column = input("Enter column (A to F): ").upper()
-        while column not in 'ABCDEF':
+        column = input("Enter column (A to E): ").upper()
+        while column not in 'ABCDE':
             column = input("Column out of bounds! Enter again: ").upper()
-        row = input("Enter Row number (1 to 6): ")
-        while row not in '123456':
+        row = input("Enter Row number (1 to 5): ")
+        while row not in '12345':
             row = input("Row out of bounds! Enter again: ")
         
         rowNo = int(row)-1
@@ -33,11 +31,11 @@ def placePlayerShip(board):
     
         while board[rowNo][colNo] == 'X':
             print("You have already placed a ship there! Try again.")
-            column = input("Enter column (A to F): ").upper()
-            while column not in 'ABCDEF':
+            column = input("Enter column (A to E): ").upper()
+            while column not in 'ABCDE':
                 column = input("Column out of bounds! Enter again: ").upper()
-            row = input("Enter Row number (1 to 6): ")
-            while row not in '123456':
+            row = input("Enter Row number (1 to 5): ")
+            while row not in '12345':
                 row = input("Row out of bounds! Enter again: ")
         
             rowNo = int(row)-1
@@ -49,7 +47,7 @@ def placePlayerShip(board):
         
 #Computer Placing Ships:
 def csPlaceShip(board):
-    print("Computer placing Battle ships...")
+    print("Genghis Khan is placing his Battle ships...")
     t.sleep(1)
     for ships in range(3):
         csRow = r.randint(0,boardSize-1)
@@ -63,11 +61,11 @@ def csPlaceShip(board):
 
 #Player Attacks:
 def playerAttack(board):
-    column=input("Enter Column (A to F): ").upper()
-    while column not in "ABCDEF":
+    column=input("Enter Column (A to E): ").upper()
+    while column not in "ABCDE":
         column = input("Column out of bounds! Enter again: ").upper()
-    row=input("Enter row number (1 to 6): ")
-    while row not in "123456":
+    row=input("Enter row number (1 to 5): ")
+    while row not in "12345":
         row = input("Row out of bounds! Enter again: ")
     
     rowNo = int(row)-1
@@ -75,11 +73,11 @@ def playerAttack(board):
 
     while board[rowNo][colNo] == '-':
         print("You already guessed that area! Try again.")
-        column = input("Enter Column (A to F)  : ").upper()
-        while column not in "ABCDEF":
+        column = input("Enter Column (A to E)  : ").upper()
+        while column not in "ABCDE":
             column = input("Column out of bounds! Enter again: ").upper()
-        row = input("Enter row number (1 to 6)  : ")
-        while row not in "123456":
+        row = input("Enter row number (1 to 5)  : ")
+        while row not in "12345":
             row = input("Row out of bounds! Enter again: ")
         
         rowNo = int(row)-1
@@ -88,12 +86,54 @@ def playerAttack(board):
 
 #Dialogue:
 def dialogue():
-    scroll([boldred],"*replacement dialogue*")
-    clear(24,4)
+    print(END)
+    clear(50)
+    scroll([boldcyan],"You're face to face with Genghis Khan's battle horde which has conquered a surplus of nations.")
+    clear(50,2)
+    print(END,Genghis,sep="\n")
+    scroll([boldred],"\"Looks like you like yourself a bit of a challenge eh!?\"")
+    clear()
+    scroll([boldred],". . . . .")
+    clear()
+    scroll([boldred],"\"I hope you're ready for what's coming!\"")
+    clear(50,3)
+    scroll([boldcyan],"This battle won't be an easy one, General!")
+    clear(50,1)
+    scroll([boldcyan],"The fight will begin soon!")
+    clear()
+    scroll([boldcyan],"Place your battle ships in strategic positions and fight for your glory!")
+    clear(50,2)
+    print(END,Genghis,sep="\n")
+    scroll([boldred],"or perish.....",0.100)
+    clear(50,4)
     print(END)
 
 #Main Game:
 def game():
+    #Creating Player's Board
+    global boardSize
+    boardSize = 5
+    global playerBoard
+    playerBoard = []
+    for i in range(boardSize):
+        row=[]
+        for j in range(boardSize):
+            row.append(' ')
+        playerBoard.append(row)
+
+    #Creating Computer's Board
+    global csBoard
+    csBoard = []
+    for i in range(boardSize):
+        row = []
+        for j in range(boardSize):
+            row.append(' ')
+        csBoard.append(row)
+
+    #Letter Number Grid
+    global grid
+    grid = {'A':0,'B':1,'C':2,'D':3,'E':4}
+    
     #Dialogue:
     dialogue()
     
@@ -129,16 +169,28 @@ def game():
         print("It's time to fire your cannon!")
         rowNo,colNo = playerAttack(csBoard)
         
-        if playerGuess[rowNo][colNo]!=' ':
+        while playerGuess[rowNo][colNo]!=' ':
             print("Those coordinates have already been destroyed!")
             t.sleep(1)
-            continue
+            rowNo,colNo = playerAttack(csBoard)
         
         if csBoard[rowNo][colNo]=='X':
             playerGuess[rowNo][colNo] = 'X'
             print("Your cannon has hit one of the enemy's battleships")
             playerHits+=1
             t.sleep(1)
+            if playerHits==3:
+                print(Genghis)
+                scroll([boldgreen],"You... beat me...")
+                clear()
+                scroll([boldgreen],"how...?")
+                scroll([boldgreen],"I surrender my kingdom to you!")
+                clear(50,2)
+                scroll([boldcyan],"Congratulations General! You have successfuly beaten the mighty ")
+                scroll([boldgreen],"Genghis Khan!")
+                clear()
+                scroll([boldcyan],"You Win!!!")
+                break
             
         else:
             playerGuess[rowNo][colNo] = '-'
@@ -150,7 +202,7 @@ def game():
         csRow = r.randint(0,boardSize-1)
         csCol = r.randint(0,boardSize-1)
         
-        if playerBoard[csRow][csCol]!=' ':
+        while csGuess[csRow][csCol]!=' ':
             csRow = r.randint(0,boardSize-1)
             csCol = r.randint(0,boardSize-1)
         
@@ -159,38 +211,19 @@ def game():
             print("One of your ship has been hit!")
             csHits+=1
             clear(1,1)
+            if csHits==3:
+                print(Genghis)
+                scroll([boldred],"You really thought you could beat me!")
+                clear()
+                scroll([boldred],"THE MIGHTY GENGHIS KHAN STILL REIGNS MIGHTY! MUAHAHAHA!")
+                clear(50,2)
+                scroll([boldcyan],"You have lost against the mighty ")
+                scroll([boldred],"Genghis Khan!")
+                clear()
+                scroll([boldcyan],"GGs!")
+                break
         
         else:
             csGuess[csRow][csCol] = '-'
             print("The enemy missed their shot!")
             clear(1,1)
-        
-        if playerHits==3:
-            print("You destroyed all of the enemy's ships! You Win!!!")
-            break
-        
-        elif csHits==3:
-            print("The enemy has hit all your battle ships! You Lost. L + Ratio + *every single insult in existence*")
-            break
-        
-#Creating Player's Board
-boardSize = 6
-playerBoard = []
-for i in range(boardSize):
-    row=[]
-    for j in range(boardSize):
-        row.append(' ')
-    playerBoard.append(row)
-
-#Creating Computer's Board
-csBoard = []
-for i in range(boardSize):
-    row = []
-    for j in range(boardSize):
-        row.append(' ')
-    csBoard.append(row)
-
-#Letter Number Grid
-grid = {'A':0,'B':1,'C':2,'D':3,'E':4,'F':5}
-
-game()
