@@ -20,7 +20,7 @@ On the story side, there are plans to expand the backstories of the characters, 
 Future implementations include adding tips, different messages for different actions in the game, altering the difficulties and making the game more difficult.
 
 ## Bibliography
-- Base game code inspiration: Battleships Code in Python (github.com)
--	Color codes in Python: ANSI color codes in Python (github.com)
--	Image to ASCII Art 1: Convert image or text to the ASCII Art (ascii-generator.site)
--	Image to ASCII Art 2: Online Ascii Art Creator (ascii-art-generator.org)
+- Base game code inspiration: [Battleships Code in Python (github.com)](https://gist.github.com/w0300133/7f3e3e6f836e519f64272150ca34080c)
+-	Color codes in Python: [ANSI color codes in Python (github.com)](https://gist.github.com/rene-d/9e584a7dd2935d0f461904b9f2950007)
+-	Image to ASCII Art 1: [Convert image or text to the ASCII Art (ascii-generator.site)](https://ascii-generator.site/)
+-	Image to ASCII Art 2: [Online Ascii Art Creator (ascii-art-generator.org)](https://www.ascii-art-generator.org/)
